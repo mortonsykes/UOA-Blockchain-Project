@@ -1,0 +1,138 @@
+/*
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * Access control list.
+ */
+
+rule TransactionsHaveFullRights {
+    description: "Give Transactions Authority to Modify, Read and Create protected Assets"
+    participant(p): "org.example.shipping.CarrierEmployee"
+    operation: ALL
+    resource(r): "**"
+    transaction(tx): "**"
+    condition:(true)
+    action: ALLOW 
+}
+
+rule UsersOnlyViewCarriersTokens {
+    description: "User can only see thier Carrier's Tokens"
+    participant(p): "org.example.shipping.CarrierEmployee"
+    operation: ALL
+    resource(r): "org.example.shipping.VoyageSlot_Token"
+    condition: (r.Owner.getIdentifier() != p.organisation.getIdentifier())
+    action: DENY
+}
+
+rule UsersOnlyViewCarriersJobs {
+    description: "User can only see thier Carrier's Jobs"
+    participant(p): "org.example.shipping.CarrierEmployee"
+    operation: ALL
+    resource(r): "org.example.shipping.Shipment_Job"
+    condition: (r.carrier.getIdentifier() != p.organisation.getIdentifier())
+    action: DENY
+}
+
+rule UsersOnlyViewCarriersYards {
+    description: "User can only see thier Carrier's yards"
+    participant(p): "org.example.shipping.CarrierEmployee"
+    operation: ALL
+    resource(r): "org.example.shipping.ContainerYardLocation"
+    condition: (r.organisation.getIdentifier() != p.organisation.getIdentifier())
+    action: DENY
+}
+
+rule UsersOnlyViewCarriersReceipts {
+    description: "User can only see thier Carrier's Recipts"
+    participant(p): "org.example.shipping.CarrierEmployee"
+    operation: ALL
+    resource(r): "org.example.shipping.SlotTokenTradeReceipt"
+    condition: (r.buyer.getIdentifier() != p.organisation.getIdentifier() && r.seller.getIdentifier() != p.organisation.getIdentifier() )
+    action: DENY
+}
+
+
+rule UsersCanReadEverything {
+    description: "Allow all participants read access to all resources"
+    participant: "org.example.shipping.CarrierEmployee"
+    operation: READ
+    resource: "org.example.shipping.*"
+    action: ALLOW
+}
+
+rule UsersCanSubmitTransactions1 {
+    description: "Allow Users to submit Transactions"
+    participant: "org.example.shipping.CarrierEmployee"
+    operation: ALL
+    resource: "org.example.shipping.Shipment_Job_Book_Voyage"
+    action: ALLOW
+}
+
+rule UsersCanSubmitTransactions2 {
+    description: "Allow Users to submit Transactions"
+    participant: "org.example.shipping.CarrierEmployee"
+    operation: ALL
+    resource: "org.example.shipping.Shipment_Job_Book_Container"
+    action: ALLOW
+}
+
+rule UsersCanSubmitTransactions3 {
+    description: "Allow Users to submit Transactions"
+    participant: "org.example.shipping.CarrierEmployee"
+    operation: ALL
+    resource: "org.example.shipping.VoyageToken_PlaceSellOrder"
+    action: ALLOW
+}
+
+rule UsersCanSubmitTransactions4 {
+    description: "Allow Users to submit Transactions"
+    participant: "org.example.shipping.CarrierEmployee"
+    operation: ALL
+    resource: "org.example.shipping.VoyageToken_EditSellOrder"
+    action: ALLOW
+}
+
+rule UsersCanSubmitTransactions5 {
+    description: "Allow Users to submit Transactions"
+    participant: "org.example.shipping.CarrierEmployee"
+    operation: ALL
+    resource: "org.example.shipping.VoyageToken_PlaceBuyOrder"
+    action: ALLOW
+}
+
+rule UsersCanSubmitTransactions6 {
+    description: "Allow Users to submit Transactions"
+    participant: "org.example.shipping.CarrierEmployee"
+    operation: ALL
+    resource: "org.example.shipping.VoyageToken_EditBuyOrder"
+    action: ALLOW
+}
+
+// Rule to allow All rights for Test Purposes (overidden by DENY rules above)
+rule EverybodyCanDoEverything {
+    description: "Allow CarrierEmployee participants All access to all resources"
+    participant: "org.example.shipping.CarrierEmployee"
+    operation: ALL
+    resource: "**"
+    action: ALLOW
+}
+
+// Admin 
+rule AdminCanIssueIdentitys {
+    description: "Grant business network administrators full access to user resources"
+    participant: "org.hyperledger.composer.system.NetworkAdmin"
+    operation: ALL
+    resource: "**"
+    action: ALLOW
+}

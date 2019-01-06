@@ -1,0 +1,470 @@
+namespace org.example.shipping
+
+participant Organisation identified by organisationID {
+  o String organisationID
+  o String name
+  o String Alliance optional
+}
+
+abstract participant User identified by userID {
+  o String userID
+  o String firstName
+  o String lastName
+  --> Organisation organisation
+}
+
+participant CarrierEmployee extends User {
+  o NetworkPermissions[] permissions
+}
+
+participant Auditor extends User {
+  --> Port[] auditorPorts
+}
+  
+enum NetworkPermissions {
+  o View_Voyages
+  o View_ShipmentJobs
+  o	Create_ShipmentJobs
+  o Modify_ShipmentJobs
+  o Book_ShipmentJobs
+  o View_VoyageSlotTokens
+  o Trade_VoyageSlotTokens
+  o View_ContainersAndContainerManagementAssets
+  o	Book_ContainerLocationTransfer
+  o Create_ContainerLocationTransferOpportunity
+  o Book_ContainerBooking
+}
+
+asset Event_ identified by eventID {
+  o String eventID
+  o String message
+  --> Container container optional
+  --> Ship ship optional
+  --> Voyage voyage optional
+}
+
+asset Port identified by portID {
+  o String portID
+  o String portName
+  o String country
+  o String city
+  --> Terminal[] terminals optional
+}
+
+asset Terminal identified by terminalID {
+  o String terminalID
+  o String terminalName  
+  o String portName
+}
+
+asset Route identified by routeID {
+  o String routeID
+  o String routeName
+  --> Port[] ports optional
+} 
+
+asset RouteSlotAllocationContract identified by routeSlotAllocationContractID {
+  o String routeSlotAllocationContractID
+  --> Route route
+  --> Ship[] fleet 
+}
+
+asset Operator_Ship_SlotAllocation identified by operator_Ship_SlotAllocationID {
+  o String operator_Ship_SlotAllocationID
+  --> RouteSlotAllocationContract contract
+  --> Organisation carrier
+  --> Ship ship
+  o Double slotAllocationRatio
+}
+  
+asset Container identified by containerID {
+  o String containerID
+  --> Organisation owner optional
+  --> Organisation carrier
+  o Boolean isCustomerSuppliedContainer
+  //--> Sensor[] sensors
+  o String ContainerType
+  o String ContainerCapacity_TEU
+  o ContainerLocationStatus containerLocationStatus
+  --> ContainerYardLocation currentContainerYardLocation optional  
+  --> Container_Voyage currentContainer_Voyage optional
+  o Boolean isAvalibleForUse
+  --> Shipment_Job currentJob optional
+} 
+
+participant Sensor identified by sensorID {
+  o String sensorID
+  --> Organisation owner optional
+  --> Container container optional
+  o SensorType sensorType
+}
+
+asset SensorReading_Temperature identified by sensorReadingID {
+  o String sensorReadingID
+  --> Sensor sensor
+  o Double temperature
+  --> Container container
+  o DateTime time
+  --> Voyage Voyage optional
+  --> ContainerYardLocation currentContainerYardLocation optional
+ // o ContainerLocationStatus containerLocationStatus
+  o String containerLocationStatus
+}
+ 
+enum SensorType {
+  o Temperature_oC
+  o Location_Lat_Long
+}
+
+enum ContainerLocationStatus {
+  o ContainerYard
+  o ContainerYardAwaitingPickup
+  o InShipVoyage
+  o InTransitByLand
+  o WithShipperCustomer
+}
+  
+
+asset Ship identified by shipID {
+  o String shipID
+  o String shipName
+  --> Organisation owner
+  --> Organisation operator
+  o String callSign
+  o Double containerCapacity_TEU
+//  o Double fuelCapacity_l    
+  //--> Sensor[] sensors
+  --> Voyage currentVoyage optional
+}
+  
+
+asset Voyage identified by voyageID {
+  o String voyageID 
+  --> Ship ship
+  --> Organisation operator
+  --> RouteSlotAllocationContract contract optional
+  --> Route route optional
+  --> Port originPort
+  --> Terminal originTerminal
+  --> Port destinationPort
+  --> Terminal destinationTerminal
+  o DateTime originArrivalTime_UTC
+  o DateTime originDepartTime_UTC
+  o DateTime destinationArrivalTime_UTC
+  o DateTime destinationDepartTime_UTC
+  o DateTime actualOriginArrivalTime_UTC optional
+  o DateTime actualOriginDepartTime_UTC optional
+  o DateTime actualDestinationArrivalTime_UTC optional
+  o DateTime actualDestinationDepartTime_UTC optional
+  //--> Container_Voyage[] container_Voyages
+  o Double plannedCruiseSpeed_KTS optional
+  o VoyageStatus voyageStatus 
+  o LoadingStatus loadingStatus optional // DELETE
+  --> Voyage nextVoyage optional
+  --> Voyage previousVoyage optional
+  o Integer TotalCapacity_TEU optional
+  o Integer BookedCapacity_TEU optional
+}
+
+enum VoyageStatus {
+  o NA
+  o OnRouteToOriginPort
+  o AtOrigin
+  o AtOriginPort_Loading
+  o OnRouteToDestination
+  o AtDestination
+  o AtDestination_Unloading
+  o Completed
+}
+
+enum LoadingStatus {
+  o NA
+  o Loading
+  o Unloading
+}
+
+asset Container_Voyage identified by container_VoyageID {
+  o String container_VoyageID
+  --> Container container optional
+  --> Voyage voyage
+  --> Shipment_Job job optional
+  --> Container_Reposition reposition optional
+  o Double consumedSlotCount_TEU default = 1.0
+  --> ContainerYardLocation OriginContainerYard optional
+  --> ContainerYardLocation DestinationContainerYard optional
+ // --> User createdByUser optional
+  --> CarrierEmployee lastModifiedByUser optional
+  o DateTime created optional
+  o DateTime lastModified optional
+
+  o Boolean mustBeLoadedOnShipAtOrigin default = true
+  o Boolean hasBeenLoadedOnShipAtOrigin default = false
+  o Boolean mustBeTakenOffShipAtDest default = true
+  o Boolean hasBeenTakenOffShipAtDest default = false
+  o Boolean isFinalVoyage default = true
+}
+
+asset VoyageSlot_Token identified by voyageSlot_TokenID {
+  o String voyageSlot_TokenID
+  o Double SlotCountBalance_TEU
+  o Double initialBalance_TEU optional // remove op
+  o Double tokensPurchased_TEU default = 0.0 optional // remove op
+  o Double tokensBuying_TEU default = 0.0 optional // remove op
+  o Double tokensSold_TEU default = 0.0 optional // remove op
+  o Double tokensSelling_TEU default = 0.0 optional // remove op
+  o Double valueSold default = 0.0 optional // remove op
+  o Double valuePurchased default = 0.0 optional // remove op
+  --> Voyage voyage
+  --> Organisation Owner
+}
+
+asset Container_Reposition identified by container_RepositionID {
+  o String container_RepositionID
+  --> Container container optional
+  --> ContainerYardLocation OriginContainerYard optional
+  --> ContainerYardLocation DestinationContainerYard optional
+   --> Organisation carrier
+}
+
+asset Shipment_Job identified by shipment_JobID {
+  o String shipment_JobID  
+  --> Port initialPort
+  --> Port finalPort
+  --> Organisation carrier
+  o DateTime CustomerPreferedDepartureDate optional
+  o DateTime CustomerPreferedArrivalDate optional
+  --> Voyage[] quoteComputedBestVoyages
+  o JobStatus jobStatus
+  o Boolean recievedPayment
+  o HaulageType originHaulageType
+  o HaulageType desinationHaulageType
+  o String carrierHaulagePickupLocation optional
+  o String carrierHaulageDropoffLocation optional
+  o CustomerSuppliedContainer customerContainer optional
+  --> CarrierEmployee createdByUser optional
+  --> CarrierEmployee lastModifiedByUser optional
+  o DateTime created optional
+  o DateTime lastModified optional
+  o String customer optional // remove op
+  o String customerID optional // remove op
+  --> Container Container optional
+  
+  o Boolean isCustomerSuppliedContainer
+  o String CustomerLoadGoodsIntoContainerDropoffLocation optional
+  o Boolean CustomerWillDropContainerAtPort optional
+  o String CustomerPreShipingContainerPickupLocation optional
+  o Boolean CustomerWillPickupContainerAtFinalDestination optional
+  o String CustomerContainerFinalDropOffLocation optional
+}
+
+enum HaulageType {
+  o MerchantHualage_CY // Customer Drop Container At port // Customer Picks up container at Port
+  o CarrierHaulage_SD // Carrier Picks Up container // Carrier Delivers Container to adress
+}
+
+enum JobStatus {
+  o Quote
+  o VoyageBooked
+  o VoyageAndContainerBooked
+  o JobCancelled
+  o JobInProgress
+  o JobComplete
+}
+
+concept CustomerSuppliedContainer {
+  o String CustomerSuppliedContainerID optional
+  o String ContainerType
+  o String ContainerISOCode
+  o String ContainerCapacity_TEU 
+}
+  
+asset SlotTokenSellOrder identified by slotTokenSellOrderID {
+  o String slotTokenSellOrderID
+  --> Organisation seller
+  --> VoyageSlot_Token sellerToken
+  --> Voyage voyage
+  o Double containerSlotQuantity_TEU
+  o Double sellPriceLimit
+  --> CarrierEmployee createdByUser optional
+  --> CarrierEmployee lastModifiedByUser optional
+  o DateTime created optional
+  o DateTime lastModified optional
+  o TokenOfferStatus status optional
+}
+  
+asset SlotTokenBuyOrder identified by slotTokenBuyOrderID {
+  o String slotTokenBuyOrderID
+  --> Organisation buyer
+  --> Voyage voyage
+  --> VoyageSlot_Token buyerToken
+  o Double containerSlotQuantity_TEU
+  o Double buyPriceLimit 
+  --> CarrierEmployee createdByUser optional
+  --> CarrierEmployee lastModifiedByUser optional
+  o DateTime created optional
+  o DateTime lastModified optional
+  o TokenOfferStatus status optional  
+}
+  
+enum TokenOfferStatus {
+  o Expired
+  o Pending
+  o Deleted
+  o Forfilled
+}
+  
+
+asset SlotTokenTradeReceipt identified by slotTokenTradeReceiptID {
+  o String slotTokenTradeReceiptID
+  --> Organisation seller
+  --> Organisation buyer
+  --> Voyage voyage
+  o Double containerSlotQuantity_TEU
+  o Double sellMinPriceLimit 
+  o Double buyMaxPriceLimit
+  o Double totalDue
+  o Boolean isPaid
+  o DateTime created optional
+  --> SlotTokenBuyOrder buyOrder
+  --> SlotTokenSellOrder sellOrder
+}
+
+asset ContainerYardLocation identified by containerYardLocationID {
+   o String containerYardLocationID
+   o String Address
+   --> Organisation organisation
+   --> Port closistPort optional
+   //--> Terminal terminal optional
+   o Boolean isSharedYard
+   o Double idleContainers optional
+   //o Double containerCapacity_TEU 
+   // To find containers in yard Query    --> ContainerYardLocation on ContainerAseet
+}
+
+asset Container_YardArivial identified by container_YardArivialID {
+   o String container_YardArivialID
+   o DateTime plannedArivalTime
+   o DateTime actualArivalTime
+   --> Container container
+   --> ContainerYardLocation yard
+   o Boolean hasArrived
+}
+
+asset Container_YardDeparture identified by container_YardDepartureID {
+   o String container_YardDepartureID
+   o DateTime plannedDepartTime
+   o DateTime actualDepartTime
+   --> Container container
+   --> ContainerYardLocation yard
+   o Boolean hasDeparted 
+}
+  
+  
+  asset ContainerUse identified by id {
+   o String id
+   --> Container container
+   --> Organisation containerOwner
+   --> Organisation containerUser
+   o DateTime containerUseFromDate_UTC
+   o DateTime containerUseReleaseDate_UTC
+   o DateTime containerUseActualReleaseDate_UTC
+   --> Shipment_Job job optional
+   --> Container_Reposition reposition optional
+}
+
+
+asset Carrier_ContainerLeaseOffering identified by carrier_ContainerLeaseOfferingID {
+  o String carrier_ContainerLeaseOfferingID
+  --> Organisation leasor
+  --> ContainerYardLocation containerYardLocation
+  o Integer originalContainerOfferQuantity
+  o Integer containerQuantityReamaining
+  o String containerType
+  o DateTime OfferExpireDate_UTC
+  o Double MaxLeaseDuration_Days
+  o Double leaseRatePerDay_USD
+}
+
+asset Container_Movement identified by container_MovementID {
+  o String container_MovementID
+  --> Container container
+  --> Shipment_Job job optional
+  --> Container_Reposition reposition optional
+  o String fromLocation
+  o String toLocation
+  o String fromLocationType
+  o String toLocationType
+  --> Organisation containerUser
+}
+
+  
+asset ContainerLeasePurchase identified by containerLeasePurchaseID {
+  o String containerLeasePurchaseID
+  --> Carrier_ContainerLeaseOffering leaseOffer
+  --> ContainerYardLocation containerYardLocation
+  --> Organisation leasor
+  --> Organisation lessee
+  o String containerType
+  o DateTime LeaseStartDate_UTC
+  o DateTime LeaseEndDate_UTC
+  o Double leaseRatePerDay_USD
+  o Boolean approvedByLeasor
+  --> Container leasedContainer optional
+}
+
+
+asset Carrier_ContainerLeasePickupCharge identified by carrier_ContainerLeasePickupChargeID {
+  o String carrier_ContainerLeasePickupChargeID
+  o Organisation Leasor
+  --> Port port
+  o Double Fee_USD
+}
+  asset Carrier_ContainerLeaseDropOffCharge identified by carrier_ContainerLeaseDropOffChargeID {
+  o String carrier_ContainerLeaseDropOffChargeID
+  o Organisation Leasor
+  --> Port port
+  o Double Fee_USD
+}
+
+
+
+transaction Shipment_Job_Book_Voyage {
+  --> Shipment_Job shipment_Job
+  o Integer containerVoyage_NextID
+}
+
+transaction Shipment_Job_Book_Container {
+  --> Shipment_Job shipment_Job
+  --> Container container
+  o Integer containerVoyage_NextID
+}
+  
+transaction VoyageToken_PlaceSellOrder {
+  --> VoyageSlot_Token voyageSlot_Token
+  o Integer quantity
+  o Double sellPrice
+  o Integer nextID
+}
+  
+transaction VoyageToken_EditSellOrder {
+  --> SlotTokenSellOrder sellOrder // existing
+  --> VoyageSlot_Token voyageSlot_Token //new
+  o Integer quantity //new
+  o Double sellPrice //new
+  o Integer nextID //new
+}
+  
+transaction VoyageToken_PlaceBuyOrder {
+  --> VoyageSlot_Token voyageSlot_Token
+  o Integer quantity
+  o Double buyPrice
+  o Integer nextID
+}
+
+transaction VoyageToken_EditBuyOrder {
+  --> SlotTokenBuyOrder buyOrder // existing
+  --> VoyageSlot_Token voyageSlot_Token //new
+  o Integer quantity //new
+  o Double buyPrice //new
+  o Integer nextID //new
+}

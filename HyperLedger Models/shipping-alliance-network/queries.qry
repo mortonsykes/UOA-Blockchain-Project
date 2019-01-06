@@ -1,0 +1,73 @@
+
+// Used When Booking a Shipment Job to obtain the relevant Slot Token 
+query getVoyageSlot_Token {
+  description: "Get the Container Voyage Slot Token for a particular Voyage and Org"
+  statement:
+      SELECT org.example.shipping.VoyageSlot_Token
+  		WHERE (voyage == _$voyage AND Owner == _$organisation)
+}
+
+
+// Used for Checking if any token Buy and Sell Orders can be forfilled
+
+query getSlotTokenSellOrder_ForVoyage {
+  description: "Get the SlotTokenSellOrders for a particular Voyage"
+  statement:
+      SELECT org.example.shipping.SlotTokenSellOrder
+  		WHERE (voyage == _$voyage AND status == "Pending" AND seller != _$organisation )
+      // Optimisation: Sorting by created not needed since by default the query is ordered by ID which makes use of automaticly generated indexs
+     // ORDER BY [created ASC] 
+}
+
+query getSlotTokenBuyOrder_ForVoyage {
+  description: "Get the SlotTokenBuyOrders for a particular Voyage"
+  statement:
+      SELECT org.example.shipping.SlotTokenBuyOrder
+  		WHERE (voyage == _$voyage AND status == "Pending" AND buyer != _$organisation)
+      // Optimisation: Sorting by created not needed since by default the query is ordered by ID which makes use of automaticly generated indexs
+     // ORDER BY [created ASC]  
+}
+
+query getSlotTokenSellOrder_WithMaxPrice {
+  description: "Get the SlotTokenSellOrders for a particular Voyage"
+  statement:
+      SELECT org.example.shipping.SlotTokenSellOrder
+  		WHERE (voyage == _$voyage AND status == "Pending" AND seller != _$organisation AND sellPriceLimit <= _$maxPrice)
+      // Optimisation: Sorting by created not needed since by default the query is ordered by ID which makes use of automaticly generated indexs
+     // ORDER BY [created ASC] 
+}
+
+query getSlotTokenSellOrder_ForEdit {
+  description: "Get the SlotTokenSellOrders for a particular Voyage"
+  statement:
+      SELECT org.example.shipping.SlotTokenSellOrder
+  		WHERE (voyage == _$voyage AND status == "Pending" AND seller != _$organisation AND slotTokenSellOrderID != _$sellOrderID)
+      // Optimisation: Sorting by created not needed since by default the query is ordered by ID which makes use of automaticly generated indexs
+     // ORDER BY [created ASC] 
+}
+
+query getSlotTokenBuyOrder_ForEdit { // No Longer Used
+  description: "Get the SlotTokenBuyOrders for a particular Voyage"
+  statement:
+      SELECT org.example.shipping.SlotTokenBuyOrder
+  		WHERE (voyage == _$voyage AND status == "Pending" AND buyer != _$organisation AND slotTokenBuyOrderID != _$buyOrderID)
+      // Optimisation: Sorting by created not needed since by default the query is ordered by ID which makes use of automaticly generated indexs
+     // ORDER BY [created ASC] 
+}
+
+
+// Used By UI for to determine Best Container for a Shipment
+query getContainerYard_ByClosistPort {
+  description: "Get the ContainerYardLocation for a particular port"
+  statement:
+      SELECT org.example.shipping.ContainerYardLocation
+  		WHERE (closistPort == _$port )
+}
+
+query getContainer_ByContainerYard {
+  description: "Get the idle Containers for a particular Container Yard"
+  statement:
+      SELECT org.example.shipping.Container
+  		WHERE (currentContainerYardLocation == _$containerYard AND isAvalibleForUse == true)
+}
+ 
