@@ -1,0 +1,100 @@
+Blockchain Tests,,,,,,,,,SQL Tests,,,,,,,
+Transaction,# Samples,Average Latency,Min,Max,Std. Dev.,Error %,Throughput (TPS),,Transaction,# Samples,Average Latency,Min,Max,Std. Dev.,Error %,Throughput (TPS)
+Create Job,112,1856,696,3393,552.85,0.00%,1.79487,,Create Job,1450,106,27,671,42.19,0.00%,24.14172
+Create Organisation,106,1490,618,4341,657.7,0.00%,1.78867,,Create Organisation,1448,94,11,370,27.5,0.00%,24.13374
+Read All Buy Orders,104,1317,683,2855,491.89,0.00%,1.77875,,Read All Buy Orders,1444,139,38,744,55.56,0.00%,24.05344
+Read Organisation ,103,637,130,2032,379.31,0.00%,1.80562,,Update Job,1442,95,13,644,29.84,0.00%,24.06221
+Update Job,103,1934,903,4308,680.9,0.00%,1.7489,,Create Buy Order,1437,93,15,367,27.48,0.00%,23.9996
+Create Buy Order,101,1674,622,4209,692.84,0.00%,1.79581,,Read Organisation ,1435,65,7,282,21.9,0.00%,24.02397
+Read Job,96,409,184,800,108.07,0.00%,1.84854,,Read Job,1435,69,6,648,31.47,0.00%,24.00509
+TOTAL,725,1346,130,4341,771.27,0.00%,11.61859,,TOTAL,10091,95,6,744,42.04,0.00%,167.88394
+,,,,,,,,,,,,,,,,
+Transaction,# Samples,Average Latency,Min,Max,Std. Dev.,Error %,Throughput (TPS),,Transaction,# Samples,Average Latency,Min,Max,Std. Dev.,Error %,Throughput (TPS)
+Create Job,112,1686,697,3704,615.75,0.00%,1.81806,,Create Job,1466,107,28,488,38.97,0.00%,24.42438
+Create Organisation,105,1676,677,4250,860.53,0.00%,1.76172,,Create Organisation,1465,94,11,437,32.28,0.00%,24.43336
+Read All Buy Orders,103,1476,670,2685,519.58,0.00%,1.7503,,Read All Buy Orders,1460,127,47,482,38.5,0.00%,24.36582
+Read Organisation ,100,731,128,1934,435,0.00%,1.72292,,Update Job,1458,94,13,478,31.59,0.00%,24.36253
+Update Job,99,2016,769,4129,965.28,0.00%,1.79449,,Create Buy Order,1455,96,17,448,36.48,0.00%,24.36411
+Create Buy Order,99,1471,754,3443,584,0.00%,1.83643,,Read Organisation ,1453,66,6,308,22.85,0.00%,24.34651
+Read Job,96,390,235,633,77.96,0.00%,1.88701,,Read Job,1451,67,6,243,21.93,0.00%,24.30934
+TOTAL,714,1362,128,4250,829.35,0.00%,11.59016,,TOTAL,10208,93,6,488,38.04,0.00%,170.02282
+,,,,,,,,,,,,,,,,
+Transaction,# Samples,Average Latency,Min,Max,Std. Dev.,Error %,Throughput (TPS),,Transaction,# Samples,Average Latency,Min,Max,Std. Dev.,Error %,Throughput (TPS)
+Create Job,106,1632,572,2972,475.38,0.00%,1.70761,,Create Job,1380,110,27,384,32.22,0.00%,22.97855
+Create Organisation,97,1842,654,4601,906.2,0.00%,1.6558,,Create Organisation,1375,99,12,342,28.24,0.00%,22.9266
+Read All Buy Orders,96,1610,697,3006,575.26,0.00%,1.7233,,Read All Buy Orders,1374,147,58,358,35.72,0.00%,22.87788
+Read Organisation ,96,787,119,2287,467.26,0.00%,1.75625,,Update Job,1368,101,18,399,30.75,0.00%,22.86822
+Update Job,96,2361,927,4171,1128.44,0.00%,1.74263,,Create Buy Order,1367,99,13,384,28.76,0.00%,22.85953
+Create Buy Order,96,1360,773,2755,523.39,0.00%,1.78336,,Read Organisation ,1365,69,3,215,23.89,0.00%,22.85399
+Read Job,90,374,204,572,89.96,0.00%,1.77417,,Read Job,1364,71,5,232,23.9,0.00%,22.84681
+TOTAL,677,1437,119,4601,903.95,0.00%,10.90616,,TOTAL,9593,99,3,399,38.09,0.00%,159.57217
+,,,,,,,,,,,,,,,,
+Transaction,# Samples,Average Latency,Min,Max,Std. Dev.,Error %,Throughput (TPS),,Transaction,# Samples,Average Latency,Min,Max,Std. Dev.,Error %,Throughput (TPS)
+Create Job,116,1694,533,3012,601.03,0.00%,1.84581,,Create Job,1317,103,24,1006,48.92,0.00%,21.93392
+Create Organisation,112,1633,601,4170,781.55,0.00%,1.87781,,Create Organisation,1316,97,11,1064,71.64,0.00%,21.94101
+Read All Buy Orders,107,1359,689,2436,470.22,0.00%,1.81902,,Read All Buy Orders,1314,207,47,6549,706.25,0.00%,21.88869
+Read Organisation ,105,652,147,1876,391.74,0.00%,1.83852,,Update Job,1309,96,14,1063,64.28,0.00%,24.47186
+Update Job,105,2003,803,3855,948.9,0.00%,1.76789,,Create Buy Order,1306,92,12,997,35.13,0.00%,24.45281
+Create Buy Order,101,1368,714,2661,496.11,0.00%,1.84055,,Read Organisation ,1304,65,6,153,21.46,0.00%,24.4685
+Read Job,100,382,237,571,85.35,0.00%,1.89883,,Read Job,1304,68,8,149,21.07,0.00%,24.43824
+TOTAL,746,1314,147,4170,803.44,0.00%,11.87047,,TOTAL,9170,104,6,6549,274.59,0.00%,152.61205
+,,,,,,,,,,,,,,,,
+Transaction,# Samples,Average Latency,Min,Max,Std. Dev.,Error %,Throughput (TPS),,Transaction,# Samples,Average Latency,Min,Max,Std. Dev.,Error %,Throughput (TPS)
+Create Job,112,1663,636,3455,575.33,0.00%,1.77128,,Create Job,1453,105,27,361,28.9,0.00%,24.18845
+Create Organisation,107,1715,638,4384,816.36,0.00%,1.77794,,Create Organisation,1451,94,14,376,29.15,0.00%,24.19422
+Read All Buy Orders,103,1508,725,2859,547.48,0.00%,1.73051,,Read All Buy Orders,1450,141,54,673,64.85,0.00%,24.15821
+Read Organisation ,98,736,88,2059,423.53,0.00%,1.72008,,Update Job,1444,94,14,376,30.18,0.00%,24.32492
+Update Job,98,2225,842,4331,962.63,0.00%,1.64496,,Create Buy Order,1442,93,13,402,30.71,0.00%,24.35852
+Create Buy Order,97,1362,742,3560,482.49,0.00%,1.75855,,Read Organisation ,1442,66,8,203,21.52,0.00%,24.33796
+Read Job,96,400,235,696,91.56,0.00%,1.8644,,Read Job,1439,68,7,179,22.06,0.00%,24.29594
+TOTAL,711,1386,88,4384,835.68,0.00%,11.24448,,TOTAL,10121,94,7,673,42.28,0.00%,168.30745
+,,,,,,,,,,,,,,,,
+Transaction,# Samples,Average Latency,Min,Max,Std. Dev.,Error %,Throughput (TPS),,Transaction,# Samples,Average Latency,Min,Max,Std. Dev.,Error %,Throughput (TPS)
+Create Job,112,1710,681,3731,553.68,0.00%,1.86997,,Create Job,1437,105,31,1070,43.22,0.00%,23.93803
+Create Organisation,112,1649,631,4316,688.3,0.00%,1.84547,,Create Organisation,1436,97,12,1053,50.58,0.00%,23.9521
+Read All Buy Orders,108,1448,761,2817,483.19,0.00%,1.8006,,Read All Buy Orders,1435,130,43,274,32.78,0.00%,23.90432
+Read Organisation ,103,684,112,2003,357.59,0.00%,1.79102,,Update Job,1429,100,23,1105,71.57,0.00%,23.85722
+Update Job,101,2015,942,4041,854.52,0.00%,1.73049,,Create Buy Order,1427,95,15,252,24.41,0.00%,23.85051
+Create Buy Order,97,1424,731,2834,559.42,0.00%,1.80647,,Read Organisation ,1426,66,5,229,21.47,0.00%,23.85293
+Read Job,97,393,200,717,98.06,0.00%,1.84176,,Read Job,1425,72,8,1029,53.51,0.00%,23.83461
+TOTAL,730,1346,112,4316,772.92,0.00%,11.78465,,TOTAL,10015,95,5,1105,49.68,0.00%,166.65835
+,,,,,,,,,,,,,,,,
+Transaction,# Samples,Average Latency,Min,Max,Std. Dev.,Error %,Throughput (TPS),,Transaction,# Samples,Average Latency,Min,Max,Std. Dev.,Error %,Throughput (TPS)
+Create Job,112,1430,602,2863,422,0.00%,1.82025,,Create Job,1239,104,39,395,28.75,0.00%,20.62765
+Create Organisation,107,1842,605,4368,971.2,0.00%,1.79947,,Create Organisation,1236,94,16,217,24.06,0.00%,20.59588
+Read All Buy Orders,101,1570,756,2777,552.84,0.00%,1.71968,,Read All Buy Orders,1234,256,58,10117,1126.42,0.00%,20.57318
+Read Organisation ,98,792,175,2076,434.36,0.00%,1.68983,,Update Job,1232,93,26,209,22.97,0.00%,24.68542
+Update Job,97,2243,909,4322,1095.77,0.00%,1.69955,,Create Buy Order,1229,93,16,209,23.55,0.00%,24.65149
+Create Buy Order,96,1297,754,2404,464.61,0.00%,1.87321,,Read Organisation ,1226,67,8,340,24.75,0.00%,24.62441
+Read Job,96,357,230,544,74.63,0.00%,1.88705,,Read Job,1225,68,6,162,21.32,0.00%,24.61223
+TOTAL,707,1372,175,4368,875.49,0.00%,11.49033,,TOTAL,8621,111,6,10117,431.06,0.00%,143.52784
+,,,,,,,,,,,,,,,,
+Transaction,# Samples,Average Latency,Min,Max,Std. Dev.,Error %,Throughput (TPS),,Transaction,# Samples,Average Latency,Min,Max,Std. Dev.,Error %,Throughput (TPS)
+Create Job,112,1764,675,3698,668.46,0.00%,1.80305,,Create Job,1485,106,21,339,36.45,0.00%,24.71828
+Create Organisation,107,1634,655,4269,789.25,0.00%,1.81803,,Create Organisation,1482,91,11,302,25.74,0.00%,24.79256
+Read All Buy Orders,105,1377,688,2714,494.2,0.00%,1.80648,,Read All Buy Orders,1480,132,51,409,37.1,0.00%,24.76573
+Read Organisation ,104,650,117,1843,373.3,0.00%,1.80879,,Update Job,1476,94,15,372,29.21,0.00%,24.73563
+Update Job,100,1992,799,4093,814.26,0.00%,1.76919,,Create Buy Order,1474,93,13,329,26.74,0.00%,24.72988
+Create Buy Order,98,1430,658,3331,517.01,0.00%,1.86927,,Read Organisation ,1471,64,7,194,21,0.00%,24.70484
+Read Job,96,402,186,930,122.59,0.00%,1.9185,,Read Job,1469,66,5,226,21.32,0.00%,24.71233
+TOTAL,722,1333,117,4269,796.1,0.00%,11.62323,,TOTAL,10337,92,5,409,36.03,0.00%,172.0253
+,,,,,,,,,,,,,,,,
+Transaction,# Samples,Average Latency,Min,Max,Std. Dev.,Error %,Throughput (TPS),,Transaction,# Samples,Average Latency,Min,Max,Std. Dev.,Error %,Throughput (TPS)
+Create Job,104,1869,670,3496,598.34,0.00%,1.71334,,Create Job,1451,105,25,406,34.13,0.00%,24.1632
+Create Organisation,99,1667,591,4581,732.98,0.00%,1.66532,,Create Organisation,1448,94,10,610,37.65,0.00%,24.12208
+Read All Buy Orders,97,1485,457,3127,559.76,0.00%,1.64871,,Read All Buy Orders,1445,140,59,683,61.36,0.00%,24.08333
+Read Organisation ,96,720,121,2267,427.06,0.00%,1.68176,,Update Job,1443,94,10,420,29.93,0.00%,24.29457
+Update Job,96,2213,656,4319,885.66,0.00%,1.6822,,Create Buy Order,1439,95,9,403,33.91,0.00%,24.25499
+Create Buy Order,95,1532,712,3727,665.58,0.00%,1.71214,,Read Organisation ,1438,66,7,245,23.31,0.00%,24.2639
+Read Job,92,431,203,821,124.71,0.00%,1.77943,,Read Job,1436,68,7,289,24.62,0.00%,24.23506
+TOTAL,679,1429,121,4581,843.51,0.00%,10.87427,,TOTAL,10100,95,7,683,43.52,0.00%,168.0924
+,,,,,,,,,,,,,,,,
+Transaction,# Samples,Average Latency,Min,Max,Std. Dev.,Error %,Throughput (TPS),,Transaction,# Samples,Average Latency,Min,Max,Std. Dev.,Error %,Throughput (TPS)
+Create Job,98,1489,596,3480,526.45,0.00%,1.64872,,Create Job,1221,113,29,393,30.62,0.00%,20.32865
+Create Organisation,98,1966,626,4731,1043.88,0.00%,1.65278,,Create Organisation,1218,104,19,1979,81.63,0.00%,20.30541
+Read All Buy Orders,96,1628,665,2757,577.8,0.00%,1.66436,,Read All Buy Orders,1216,227,59,7064,761.4,0.00%,20.24473
+Read Organisation ,96,766,119,2102,442.31,0.00%,1.68265,,Update Job,1210,101,17,374,27.38,0.00%,22.85175
+Update Job,96,2381,742,4704,1161.41,0.00%,1.63454,,Create Buy Order,1209,101,17,341,27.79,0.00%,22.84451
+Create Buy Order,95,1498,751,2881,571.62,0.00%,1.73799,,Read Organisation ,1206,68,11,165,22.7,0.00%,22.82794
+Read Job,84,392,219,1027,110.81,0.00%,1.62857,,Read Job,1205,72,7,195,24.63,0.00%,22.84187
+TOTAL,663,1466,119,4731,949.53,0.00%,10.63813,,TOTAL,8485,113,7,7064,294.92,0.00%,141.09685
