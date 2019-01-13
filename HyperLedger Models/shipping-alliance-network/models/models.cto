@@ -1,5 +1,7 @@
 namespace org.example.shipping
 
+// Participant Definitions
+
 participant Organisation identified by organisationID {
   o String organisationID
   o String name
@@ -34,6 +36,8 @@ enum NetworkPermissions {
   o Create_ContainerLocationTransferOpportunity
   o Book_ContainerBooking
 }
+
+// Asset Definitions
 
 asset Event_ identified by eventID {
   o String eventID
@@ -82,7 +86,7 @@ asset Container identified by containerID {
   --> Organisation owner optional
   --> Organisation carrier
   o Boolean isCustomerSuppliedContainer
-  //--> Sensor[] sensors
+  //--> Sensor[] sensors             // Cut Feature
   o String ContainerType
   o String ContainerCapacity_TEU
   o ContainerLocationStatus containerLocationStatus
@@ -92,13 +96,15 @@ asset Container identified by containerID {
   --> Shipment_Job currentJob optional
 } 
 
+// Cut Feature
 participant Sensor identified by sensorID {
-  o String sensorID
+  o String sensorID     
   --> Organisation owner optional
   --> Container container optional
   o SensorType sensorType
 }
 
+// Cut Feature
 asset SensorReading_Temperature identified by sensorReadingID {
   o String sensorReadingID
   --> Sensor sensor
@@ -132,8 +138,8 @@ asset Ship identified by shipID {
   --> Organisation operator
   o String callSign
   o Double containerCapacity_TEU
-//  o Double fuelCapacity_l    
-  //--> Sensor[] sensors
+  //  o Double fuelCapacity_l        
+  //--> Sensor[] sensors              // Cut Feature
   --> Voyage currentVoyage optional
 }
   
@@ -156,10 +162,9 @@ asset Voyage identified by voyageID {
   o DateTime actualOriginDepartTime_UTC optional
   o DateTime actualDestinationArrivalTime_UTC optional
   o DateTime actualDestinationDepartTime_UTC optional
-  //--> Container_Voyage[] container_Voyages
   o Double plannedCruiseSpeed_KTS optional
   o VoyageStatus voyageStatus 
-  o LoadingStatus loadingStatus optional // DELETE
+  o LoadingStatus loadingStatus optional 
   --> Voyage nextVoyage optional
   --> Voyage previousVoyage optional
   o Integer TotalCapacity_TEU optional
@@ -192,7 +197,6 @@ asset Container_Voyage identified by container_VoyageID {
   o Double consumedSlotCount_TEU default = 1.0
   --> ContainerYardLocation OriginContainerYard optional
   --> ContainerYardLocation DestinationContainerYard optional
- // --> User createdByUser optional
   --> CarrierEmployee lastModifiedByUser optional
   o DateTime created optional
   o DateTime lastModified optional
@@ -207,13 +211,13 @@ asset Container_Voyage identified by container_VoyageID {
 asset VoyageSlot_Token identified by voyageSlot_TokenID {
   o String voyageSlot_TokenID
   o Double SlotCountBalance_TEU
-  o Double initialBalance_TEU optional // remove op
-  o Double tokensPurchased_TEU default = 0.0 optional // remove op
-  o Double tokensBuying_TEU default = 0.0 optional // remove op
-  o Double tokensSold_TEU default = 0.0 optional // remove op
-  o Double tokensSelling_TEU default = 0.0 optional // remove op
-  o Double valueSold default = 0.0 optional // remove op
-  o Double valuePurchased default = 0.0 optional // remove op
+  o Double initialBalance_TEU optional 
+  o Double tokensPurchased_TEU default = 0.0 optional 
+  o Double tokensBuying_TEU default = 0.0 optional 
+  o Double tokensSold_TEU default = 0.0 optional 
+  o Double tokensSelling_TEU default = 0.0 optional 
+  o Double valueSold default = 0.0 optional 
+  o Double valuePurchased default = 0.0 optional 
   --> Voyage voyage
   --> Organisation Owner
 }
@@ -245,8 +249,8 @@ asset Shipment_Job identified by shipment_JobID {
   --> CarrierEmployee lastModifiedByUser optional
   o DateTime created optional
   o DateTime lastModified optional
-  o String customer optional // remove op
-  o String customerID optional // remove op
+  o String customer optional 
+  o String customerID optional 
   --> Container Container optional
   
   o Boolean isCustomerSuppliedContainer
@@ -334,11 +338,8 @@ asset ContainerYardLocation identified by containerYardLocationID {
    o String Address
    --> Organisation organisation
    --> Port closistPort optional
-   //--> Terminal terminal optional
    o Boolean isSharedYard
    o Double idleContainers optional
-   //o Double containerCapacity_TEU 
-   // To find containers in yard Query    --> ContainerYardLocation on ContainerAseet
 }
 
 asset Container_YardArivial identified by container_YardArivialID {
@@ -412,7 +413,6 @@ asset ContainerLeasePurchase identified by containerLeasePurchaseID {
   --> Container leasedContainer optional
 }
 
-
 asset Carrier_ContainerLeasePickupCharge identified by carrier_ContainerLeasePickupChargeID {
   o String carrier_ContainerLeasePickupChargeID
   o Organisation Leasor
@@ -426,7 +426,7 @@ asset Carrier_ContainerLeasePickupCharge identified by carrier_ContainerLeasePic
   o Double Fee_USD
 }
 
-
+// Transaction Definitions
 
 transaction Shipment_Job_Book_Voyage {
   --> Shipment_Job shipment_Job
@@ -447,11 +447,11 @@ transaction VoyageToken_PlaceSellOrder {
 }
   
 transaction VoyageToken_EditSellOrder {
-  --> SlotTokenSellOrder sellOrder // existing
-  --> VoyageSlot_Token voyageSlot_Token //new
-  o Integer quantity //new
-  o Double sellPrice //new
-  o Integer nextID //new
+  --> SlotTokenSellOrder sellOrder 
+  --> VoyageSlot_Token voyageSlot_Token 
+  o Integer quantity
+  o Double sellPrice 
+  o Integer nextID 
 }
   
 transaction VoyageToken_PlaceBuyOrder {
@@ -462,9 +462,9 @@ transaction VoyageToken_PlaceBuyOrder {
 }
 
 transaction VoyageToken_EditBuyOrder {
-  --> SlotTokenBuyOrder buyOrder // existing
-  --> VoyageSlot_Token voyageSlot_Token //new
-  o Integer quantity //new
-  o Double buyPrice //new
-  o Integer nextID //new
+  --> SlotTokenBuyOrder buyOrder 
+  --> VoyageSlot_Token voyageSlot_Token 
+  o Integer quantity 
+  o Double buyPrice 
+  o Integer nextID 
 }
