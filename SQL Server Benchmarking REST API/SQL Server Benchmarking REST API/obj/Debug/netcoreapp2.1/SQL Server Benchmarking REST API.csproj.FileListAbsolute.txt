@@ -1,0 +1,14 @@
+C:\Users\Morton\source\repos\SQL Server Benchmarking REST API\SQL Server Benchmarking REST API\bin\Debug\netcoreapp2.1\SQL Server Benchmarking REST API.deps.json
+C:\Users\Morton\source\repos\SQL Server Benchmarking REST API\SQL Server Benchmarking REST API\bin\Debug\netcoreapp2.1\SQL Server Benchmarking REST API.runtimeconfig.json
+C:\Users\Morton\source\repos\SQL Server Benchmarking REST API\SQL Server Benchmarking REST API\bin\Debug\netcoreapp2.1\SQL Server Benchmarking REST API.runtimeconfig.dev.json
+C:\Users\Morton\source\repos\SQL Server Benchmarking REST API\SQL Server Benchmarking REST API\bin\Debug\netcoreapp2.1\SQL Server Benchmarking REST API.dll
+C:\Users\Morton\source\repos\SQL Server Benchmarking REST API\SQL Server Benchmarking REST API\bin\Debug\netcoreapp2.1\SQL Server Benchmarking REST API.pdb
+C:\Users\Morton\source\repos\SQL Server Benchmarking REST API\SQL Server Benchmarking REST API\obj\Debug\netcoreapp2.1\SQL Server Benchmarking REST API.csproj.CoreCompileInputs.cache
+C:\Users\Morton\source\repos\SQL Server Benchmarking REST API\SQL Server Benchmarking REST API\obj\Debug\netcoreapp2.1\SQL Server Benchmarking REST API.RazorAssemblyInfo.cache
+C:\Users\Morton\source\repos\SQL Server Benchmarking REST API\SQL Server Benchmarking REST API\obj\Debug\netcoreapp2.1\SQL Server Benchmarking REST API.RazorAssemblyInfo.cs
+C:\Users\Morton\source\repos\SQL Server Benchmarking REST API\SQL Server Benchmarking REST API\obj\Debug\netcoreapp2.1\SQL Server Benchmarking REST API.AssemblyInfoInputs.cache
+C:\Users\Morton\source\repos\SQL Server Benchmarking REST API\SQL Server Benchmarking REST API\obj\Debug\netcoreapp2.1\SQL Server Benchmarking REST API.AssemblyInfo.cs
+C:\Users\Morton\source\repos\SQL Server Benchmarking REST API\SQL Server Benchmarking REST API\obj\Debug\netcoreapp2.1\SQL Server Benchmarking REST API.RazorTargetAssemblyInfo.cache
+C:\Users\Morton\source\repos\SQL Server Benchmarking REST API\SQL Server Benchmarking REST API\obj\Debug\netcoreapp2.1\SQL Server Benchmarking REST API.dll
+C:\Users\Morton\source\repos\SQL Server Benchmarking REST API\SQL Server Benchmarking REST API\obj\Debug\netcoreapp2.1\SQL Server Benchmarking REST API.pdb
+C:\Users\Morton\source\repos\SQL Server Benchmarking REST API\SQL Server Benchmarking REST API\obj\Debug\netcoreapp2.1\SQL Server Benchmarking REST API.csprojAssemblyReference.cache
